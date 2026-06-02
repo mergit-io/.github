@@ -1,0 +1,180 @@
+name: Bug Report
+description: Report a reproducible bug in any Mergit service or contract
+title: "bug: <short description>"
+labels: ["bug", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before filing, please check that no existing issue already tracks this bug.
+        For security vulnerabilities, **do not open a public issue** — email the team directly.
+
+  - type: dropdown
+    id: service
+    attributes:
+      label: Affected Service
+      description: Which service or layer is the bug in?
+      multiple: false
+      options:
+        - api-gateway (Rust / Axum)
+        - orchestration (Python / LangGraph)
+        - identity (Rust / alloy)
+        - blockchain-indexer (Rust / alloy)
+        - reputation (Rust / Axum)
+        - tool-server-github
+        - tool-server-code
+        - tool-server-search
+        - frontend (React / TypeScript)
+        - contracts (Solidity)
+        - infra / Docker Compose
+        - unknown / cross-service
+    validations:
+      required: true
+
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Phase
+      description: Which delivery phase introduced or exposed this bug?
+      options:
+        - Phase 0 — Foundation
+        - Phase 1 — Core Agent Execution
+        - Phase 2 — Identity and Blockchain
+        - Phase 3 — Reputation and Badges
+        - Phase 4 — Frontend
+        - Phase 5 — Production Hardening
+        - Unknown
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: "When I submit a goal with tool X, the orchestration service panics with..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Exact steps to reproduce the behavior.
+      placeholder: |
+        1. Start the stack with `docker compose up`
+        2. Register an agent via `POST /agents`
+        3. Submit a goal via `POST /goals` with body `{ ... }`
+        4. Observe error in service logs
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should have happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened? Include error messages verbatim.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs and Stack Traces
+      description: |
+        Paste relevant log output, stack traces, or Rust panics here.
+        Use `docker compose logs <service> --tail=100` to capture service logs.
+      render: text
+
+  - type: textarea
+    id: onchain
+    attributes:
+      label: On-Chain Context (if applicable)
+      description: |
+        If the bug involves a blockchain transaction, paste the Monad explorer link
+        or transaction hash here. For proof recording or reputation update failures,
+        include the `task_id`, `goal_id`, and any tx hashes from service logs.
+      placeholder: |
+        tx_hash: 0x...
+        task_id: uuid
+        goal_id: uuid
+        Explorer: https://testnet.monadexplorer.com/tx/0x...
+
+  - type: textarea
+    id: langgraph
+    attributes:
+      label: LangGraph / Agent State (if applicable)
+      description: |
+        If the bug is in orchestration, include the `goal_id`, `thread_id`, and
+        the last few SSE events received (from `/stream/goals/{id}`).
+      placeholder: |
+        goal_id: uuid
+        thread_id: uuid:0
+        Last SSE events:
+          task.started → task_id=...
+          task.tool_call → tool=github_pr args={...}
+          task.failed → error=...
+
+  - type: input
+    id: version
+    attributes:
+      label: Commit / Image Tag
+      description: Git commit SHA or Docker image tag where the bug was observed.
+      placeholder: "e.g. abc1234 or ghcr.io/mergit-io/api-gateway:main-abc1234"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - Local (docker compose)
+        - Staging
+        - Production
+        - CI
+    validations:
+      required: true
+
+  - type: dropdown
+    id: network
+    attributes:
+      label: Blockchain Network (if applicable)
+      options:
+        - N/A
+        - Monad Testnet (chain ID 10143)
+        - Monad Mainnet (chain ID 143)
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - critical — data loss, incorrect on-chain state, or security issue
+        - high — core feature broken, no workaround
+        - medium — feature degraded, workaround exists
+        - low — cosmetic or minor inconvenience
+    validations:
+      required: true
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround
+      description: If you found a way to work around the bug, describe it here.
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: |
+        Anything else relevant — related issues, PRs, OpenTelemetry trace IDs,
+        Prometheus alert names, or Jaeger trace links.
