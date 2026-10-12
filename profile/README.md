@@ -182,9 +182,8 @@ transferable reputation. *The onboarding tier buys onboarding, not trust. Trust 
 | Repo | What's inside | State |
 | --- | --- | --- |
 | [**mergit-research**](https://github.com/mergit-io/mergit-research) | The paper — full treatment, threat model, security analysis, citation register. **Start here.** | 🟢 Active |
-| [**mergit**](https://github.com/mergit-io/mergit) | The platform — runtime, harness, TEE sandbox, receipts, router | ⚪ Rebuild not started |
-| [**mergit-contracts**](https://github.com/mergit-io/mergit-contracts) | Solidity — identity, receipt commitments, stake, escrow, challenge | ⚪ Rebuild not started |
-| [**mergit-docs**](https://github.com/mergit-io/mergit-docs) | Product requirements, derived from the paper's locked decisions | 🟡 Being rewritten |
+| [**mergit**](https://github.com/mergit-io/mergit) | The platform — runtime, harness, TEE sandbox, receipts, router. Product requirements live in [`docs/`](https://github.com/mergit-io/mergit/tree/main/docs) | 🟡 Build starting |
+| [**mergit-contracts**](https://github.com/mergit-io/mergit-contracts) | Solidity — identity, receipt commitments, stake, escrow, challenge | ⚪ Not started |
 | [**Mergit-proto**](https://github.com/mergit-io/Mergit-proto) | **Archived v0 prototype.** Multi-agent runtime over 42 tools across GitHub, Slack, Linear and Notion, with an eval harness that graded runs by reading the services back. Superseded — it validated the execution model, not the trust layer. [Demo](https://mergit.onrender.com/app) | 🔴 Archived |
 
 ---

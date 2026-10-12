@@ -1,39 +1,54 @@
 name: Bug report
-description: Something in a Mergit repository does not work as documented
+description: Report a reproducible bug in the runtime, contracts, or tooling
 title: "bug: <short description>"
 labels: ["bug", "needs-triage"]
 body:
   - type: markdown
     attributes:
       value: |
-        **Mergit is pre-implementation.** There is no runtime or deployed contract yet, so most
-        reports here will be about tooling, build scripts, figures or docs. If the problem is an
-        error in the *argument*, use the **Paper correction** form instead.
+        Before filing, check that no existing issue already tracks this.
 
-        The archived [`Mergit-proto`](https://github.com/mergit-io/Mergit-proto) is out of scope —
-        it is a discarded prototype and will not be patched.
+        If the problem is an error in the *argument* rather than the code — a derivation, a
+        citation, an over-claim — use the **Paper correction** form instead.
 
         For security vulnerabilities, **do not open a public issue** — see
         [SECURITY.md](https://github.com/mergit-io/.github/blob/main/SECURITY.md).
 
+        **Already an open issue for this?** Do not open a pull request against it without being
+        assigned — comment on the issue with your approach and wait. See
+        [CONTRIBUTING.md](https://github.com/mergit-io/.github/blob/main/CONTRIBUTING.md#before-you-start-work).
+
   - type: dropdown
-    id: repo
+    id: component
     attributes:
-      label: Repository
+      label: Component
+      description: Which part of the system is the bug in?
       options:
-        - mergit-research (paper, figures, tooling)
-        - mergit-docs (requirements)
-        - mergit (runtime)
-        - mergit-contracts (Solidity)
-        - .github (org defaults, templates, profile)
+        - control plane — task intake, predicate validation, quotas, tiers
+        - router — agent selection, Thompson sampling, budget enforcement
+        - execution runtime — harness, agent loop, tool layer
+        - TEE sandbox — enclave, measured image, attestation
+        - metering — token and gas accounting
+        - receipt builder — step emission, hash chain, Merkle tree, signing
+        - receipt store — content addressing, tiered disclosure
+        - validator — audit path, predicate evaluation
+        - challenge path — bonding, dispute, verdict
+        - reputation service — posteriors, decay, value density
+        - contracts — Solidity
+        - chain integration — RPC, indexing, tx submission and retry
+        - SDK / CLI
+        - frontend — receipt inspection, dashboards
+        - infra / CI
+        - unknown / cross-component
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: What happened
-      description: What you expected, and what you got instead.
+      label: Bug description
+      description: What you expected, and what happened instead.
+      placeholder: "Submitting a goal with tool X leaves the task in a state the router never retries..."
     validations:
       required: true
 
@@ -41,37 +56,125 @@ body:
     id: steps
     attributes:
       label: Steps to reproduce
-      description: Exact commands, in order.
+      description: Exact steps, in order.
       placeholder: |
-        1. Clone the repo at commit abc1234
-        2. Run `python paper/figures/fig_audit_rate.py`
-        3. Observe the traceback below
+        1. Start the stack
+        2. Register an agent with stake S
+        3. Submit a task with predicate `tests pass`
+        4. Observe the error in the runtime logs
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include error messages verbatim.
     validations:
       required: true
 
   - type: textarea
     id: logs
     attributes:
-      label: Output
-      description: Paste the error verbatim — full traceback, not a summary.
+      label: Logs and stack traces
+      description: Paste the relevant output — full traceback, not a summary.
       render: text
 
-  - type: input
-    id: commit
+  - type: textarea
+    id: receipt
     attributes:
-      label: Commit
-      description: The commit SHA where you saw this.
+      label: Receipt context (if applicable)
+      description: |
+        If the bug involves execution, settlement or audit, include the identifiers needed to find
+        the run.
+      placeholder: |
+        task_id:
+        agent_id:
+        receipt_root: 0x...
+        attestation verified: yes / no / unknown
+        step where it went wrong:
+      render: text
+
+  - type: textarea
+    id: onchain
+    attributes:
+      label: On-chain context (if applicable)
+      description: Transaction hashes, contract addresses, and an explorer link.
+      placeholder: |
+        contract:
+        tx_hash: 0x...
+        block:
+        explorer:
+      render: text
+
+  - type: dropdown
+    id: network
+    attributes:
+      label: Network (if applicable)
+      options:
+        - N/A — no chain involved
+        - Local devnet
+        - L2 testnet
+        - L2 mainnet
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - Local development
+        - Staging
+        - Production
+        - CI
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Commit or image tag
+      description: Where you observed this.
+      placeholder: "abc1234, or ghcr.io/mergit-io/runtime:main-abc1234"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - critical — incorrect settlement, lost funds, bad on-chain state, or a security issue
+        - high — core path broken, no workaround
+        - medium — degraded, workaround exists
+        - low — cosmetic or minor
     validations:
       required: true
 
   - type: textarea
-    id: environment
+    id: workaround
     attributes:
-      label: Environment
-      description: OS, and the version of whatever tool is involved (Python, Node, Foundry, …).
+      label: Workaround
+      description: If you found one, describe it.
 
   - type: textarea
     id: additional
     attributes:
-      label: Anything else
-      description: Workaround you found, related issues, a guess at the cause.
+      label: Additional context
+      description: Related issues or PRs, trace IDs, a guess at the cause.
+
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched open and closed issues, and this is not a duplicate
+          required: true
+        - label: This is not about the archived Mergit-proto prototype, which is no longer maintained
+          required: true

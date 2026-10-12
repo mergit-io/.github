@@ -1,7 +1,7 @@
 # Contributing to Mergit
 
-Mergit is **pre-implementation**. There is no runtime to patch yet, and that shapes what is
-useful to contribute right now.
+Implementation is starting. The paper defines what gets built, so a correction to it is still the
+highest-leverage contribution — but code work is opening up, and the sections below cover both.
 
 ## The most valuable contribution today is a correction to the paper
 
@@ -52,8 +52,8 @@ rather than left open:
   correction to a derivation without the working.
 - **Ambiguous reports.** No section reference, no quote, no reproduction — anything we would have
   to guess at to act on.
-- **Unrelated or out of scope.** Changes to the archived prototype, speculative features, or work
-  on a repo whose rebuild has not started.
+- **Unrelated or out of scope.** Changes to the archived prototype, or features neither the paper
+  nor the PRD describes and no issue has agreed to.
 - **Duplicates**, including of a closed issue that was already decided.
 - **Pull requests against an unassigned issue**, per the section above.
 
@@ -65,10 +65,16 @@ checked and which you did not, and the submission stands on that.
 
 ## Code
 
-When the rebuild starts, the runtime lands in [`mergit`](https://github.com/mergit-io/mergit) and
-the Solidity in [`mergit-contracts`](https://github.com/mergit-io/mergit-contracts). Until a repo
-has a README describing how to build it, assume it is not ready for patches — open an issue first
-and ask.
+The runtime lands in [`mergit`](https://github.com/mergit-io/mergit) and the Solidity in
+[`mergit-contracts`](https://github.com/mergit-io/mergit-contracts). Each repo's README is the
+build instructions; if it does not have one yet, that repo is still being scaffolded — open an
+issue and ask what is ready rather than guessing.
+
+Everything is built against the design in
+[the paper](https://github.com/mergit-io/mergit-research/blob/main/paper/draft-v1.md) and the
+requirements in [PRD.md](https://github.com/mergit-io/mergit/blob/main/docs/PRD.md). A pull request
+that implements something those two do not describe will be asked for an issue first — not because
+the idea is bad, but because the design decision belongs somewhere citable.
 
 The archived [`Mergit-proto`](https://github.com/mergit-io/Mergit-proto) is **not** accepting
 feature work. It is kept as a record of the v0 execution model.
