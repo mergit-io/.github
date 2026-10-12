@@ -1,0 +1,82 @@
+name: Paper correction
+description: Something in the paper is wrong, unsupported, mis-cited, or over-claimed
+title: "paper: <section> — <short description>"
+labels: ["paper", "correction", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is the most valuable issue you can open right now. The project is pre-implementation —
+        the argument *is* the product, so an error in it is a defect in the product.
+
+        If you have found a way for an agent to profit by cheating the mechanism, use the
+        **Mechanism challenge** form instead.
+
+  - type: dropdown
+    id: document
+    attributes:
+      label: Document
+      options:
+        - paper/draft-v1.md (full paper)
+        - paper/whitepaper.md (condensed)
+        - paper/research.md (citation register)
+        - docs/superpowers/specs/ (design brief)
+        - Organization profile README
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Section and line
+      description: Where exactly? Quote the heading and line number if you can.
+      placeholder: "§7.3 Verification economics, around line 940"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of problem
+      options:
+        - Factual error — a stated fact is wrong
+        - Derivation error — the maths does not follow
+        - Mis-citation — the source does not say this
+        - Missing prior art — someone already did this
+        - Over-claim — stronger than the evidence supports
+        - Ambiguity — can be read two ways
+        - Typo or formatting
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: What it currently says
+      description: Quote it verbatim.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Why it is wrong
+      description: Show your working. For a derivation, give the step that breaks.
+    validations:
+      required: true
+
+  - type: textarea
+    id: fix
+    attributes:
+      label: What it should say
+      description: Proposed replacement text, if you have one.
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: |
+        Links, DOIs, or paper titles backing your correction. If you are pointing at prior art,
+        say which part of it overlaps which part of ours.

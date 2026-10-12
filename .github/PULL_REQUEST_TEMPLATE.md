@@ -1,89 +1,55 @@
 ## Summary
 
-<!-- What does this change do? Link the issue: Closes #N -->
+<!-- What does this change do, and why? Link the issue: Closes #N -->
 
-## Type of Change
+## Type of change
 
-- [ ] `feat` — new feature
+- [ ] `paper` — correction, derivation, or new section in the research
+- [ ] `docs` — requirements, README, or other prose
+- [ ] `feat` — new functionality
 - [ ] `fix` — bug fix
-- [ ] `chore` — maintenance / dependencies / docs
-- [ ] `contracts` — Solidity changes
-- [ ] `infra` — infrastructure / CI / Docker / K8s
+- [ ] `contracts` — Solidity
+- [ ] `chore` — dependencies, tooling, CI
 
-## Service(s) Affected
+## What I verified
 
-- [ ] `api-gateway` (Rust / Axum)
-- [ ] `orchestration` (Python / LangGraph)
-- [ ] `identity` (Rust / alloy)
-- [ ] `blockchain-indexer` (Rust / alloy)
-- [ ] `reputation` (Rust / Axum)
-- [ ] `tool-server-github`
-- [ ] `tool-server-code`
-- [ ] `tool-server-search`
-- [ ] `frontend` (React / TypeScript)
-- [ ] `contracts` (Solidity / Foundry)
-- [ ] `infra` / `libs`
+<!--
+Be specific, and say what you did NOT check. "Derivation re-done by hand, numbers in the table not
+recomputed" is a complete and useful answer. An unverified claim presented as verified is the exact
+failure mode this project exists to fix.
+-->
+
+- Verified:
+- Not verified:
 
 ## Checklist
 
-**All changes**
+- [ ] One concern per PR — this change does one thing
+- [ ] No secrets committed (no private keys, API keys, `.env` files, mnemonics)
+- [ ] Claims in the diff are supported by something a reviewer can check
+
+**If this touches the paper**
+- [ ] Citation numbers resolve against `paper/research.md` (that register is the only place numbering changes)
+- [ ] Every new citation is marked `VERIFIED` or `TO VERIFY` — nothing unchecked is presented as confirmed
+- [ ] `paper/whitepaper.md` updated if the change affects anything it also states
+- [ ] Nothing is claimed as measured — the project is pre-implementation
+
+**If this touches contracts**
+- [ ] `forge fmt --check`, `forge build`, `forge test -vvv` pass
+- [ ] Gas diff noted below if a public function changed
+- [ ] Security implications stated, or explicitly "none"
+
+**If this touches the runtime**
 - [ ] Tests added or updated
-- [ ] No secrets committed (no private keys, API keys, or `.env` files)
-- [ ] `ARCHITECTURE.md` updated if service topology or gRPC contracts changed
-
-**Rust changes**
-- [ ] `cargo fmt --check` passes
-- [ ] `cargo clippy -- -D warnings` clean
-- [ ] `cargo test --workspace --locked` passes
-- [ ] `cargo audit` clean
-
-**Python changes**
-- [ ] `ruff check` and `ruff format --check` pass
-- [ ] `mypy` passes
-- [ ] `pytest --cov` passes with ≥80% coverage on changed modules
-
-**Contract changes**
-- [ ] `forge fmt --check` passes
-- [ ] `forge build` succeeds
-- [ ] `forge test -vvv --gas-report` passes
-- [ ] `slither` output reviewed and findings addressed or documented
-- [ ] `deployments/{chain_id}.json` updated if contracts redeployed
-- [ ] Gas diff noted in **Blockchain Impact** section below
-
-**Frontend changes**
-- [ ] TypeScript type-checks clean (`tsc --noEmit`)
-- [ ] Tested in browser against local dev stack
-
-## Blockchain Impact
-
-<!-- Fill in if contracts/ or blockchain-indexer/ or identity/ changed -->
-
-- Contract redeployment needed? Yes / No
-- New roles granted or revoked? Yes / No — if yes, list changes
-- Oracle key path affected? Yes / No — if yes, security review requested
-- Gas diff (if applicable):
-
-| Function | Before | After | Delta |
-|----------|--------|-------|-------|
-|          |        |       |       |
-
-## LangGraph / Orchestration Impact
-
-<!-- Fill in if orchestration/ or tool-server-* changed -->
-
-- New or modified graph nodes?
-- Interrupt points added or changed?
-- LLM prompt or caching strategy changed?
-- New tools added to tool servers?
-
-## Test Plan
-
-<!-- Steps to verify this change manually against `docker compose up` -->
-
-1.
-2.
-3.
+- [ ] Receipt format changes are backward-compatible, or the break is called out below
 
 ## Evidence
 
-<!-- Monad explorer link for on-chain changes, UI screenshot for frontend, curl output for API changes -->
+<!--
+Paste what backs the change: test output, a recomputed number, a quote from the cited source with
+its page or section, an explorer link for an on-chain change, a screenshot for UI.
+-->
+
+## Breaking changes / follow-ups
+
+<!-- Anything a reader should know next. "None" is a valid answer. -->

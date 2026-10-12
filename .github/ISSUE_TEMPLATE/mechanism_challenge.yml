@@ -1,0 +1,65 @@
+name: Mechanism challenge
+description: You found a way to profit by cheating, or a case where the incentives do not bind
+title: "mechanism: <short description of the attack>"
+labels: ["mechanism", "security", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Nothing is deployed, so there is no live system to attack and public discussion is fine.
+        If you have found a *deployed* vulnerability (committed secrets, supply chain), stop and
+        follow [SECURITY.md](https://github.com/mergit-io/.github/blob/main/SECURITY.md) instead.
+
+  - type: dropdown
+    id: target
+    attributes:
+      label: Which mechanism
+      options:
+        - Verifiable Execution Receipts — commitment, hash chain, disclosure
+        - TEE attestation and the trust it relocates
+        - Verification economics — audit rate, stake, slashing
+        - Concurrency cap on unresolved tasks
+        - Cost-adjusted reputation — Beta/Gamma posteriors, decay
+        - Routing — Thompson sampling, exploration subsidy
+        - Settlement — escrow, dispute window, clawback
+        - Sybil resistance and identity
+        - Challenger incentives — the assumption that q > 0
+        - Cross-mechanism / other
+    validations:
+      required: true
+
+  - type: textarea
+    id: attack
+    attributes:
+      label: The deviation
+      description: What does the dishonest party do, step by step?
+    validations:
+      required: true
+
+  - type: textarea
+    id: profit
+    attributes:
+      label: Why it pays
+      description: |
+        Show the arithmetic against the stated model. Name the parameters you assume
+        (V, S, λ, θ, p, q, c_exec) and where your assumption differs from the paper's.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: assumptions
+    attributes:
+      label: Assumptions your attack needs
+      description: |
+        Collusion? A compromised TEE? Repeated interaction? No challenger present? Be explicit —
+        an attack that needs an assumption the threat model already excludes is still worth filing,
+        but say so.
+    validations:
+      required: true
+
+  - type: textarea
+    id: fix
+    attributes:
+      label: Suggested mitigation
+      description: Optional. Including "I don't see one" is useful information.

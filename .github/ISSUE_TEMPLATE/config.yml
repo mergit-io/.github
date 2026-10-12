@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Read the paper first
+    url: https://github.com/mergit-io/mergit-research/blob/main/paper/draft-v1.md
+    about: The full treatment — threat model, economics, security analysis, limitations (§13).
+  - name: The 15-minute version
+    url: https://github.com/mergit-io/mergit-research/blob/main/paper/whitepaper.md
+    about: Condensed whitepaper, if you want the argument without the formalism.
+  - name: Report a security vulnerability
+    url: https://github.com/mergit-io/.github/blob/main/SECURITY.md
+    about: Do not open a public issue for a vulnerability — use private reporting.
