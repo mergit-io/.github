@@ -12,6 +12,9 @@ body:
         If you have found a way for an agent to profit by cheating the mechanism, use the
         **Mechanism challenge** form instead.
 
+        **Already an open issue for this?** Do not open a pull request against it without being
+        assigned — comment on the issue with your approach and wait. See
+        [CONTRIBUTING.md](https://github.com/mergit-io/.github/blob/main/CONTRIBUTING.md#before-you-start-work).
   - type: dropdown
     id: document
     attributes:
@@ -80,3 +83,15 @@ body:
       description: |
         Links, DOIs, or paper titles backing your correction. If you are pointing at prior art,
         say which part of it overlaps which part of ours.
+
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched open and closed issues, and this is not a duplicate
+          required: true
+        - label: I have quoted the text I am correcting and said what should replace it
+          required: true
+        - label: I understand that a claim presented as fact without a source, or a report too ambiguous to act on, is closed as not planned
+          required: true

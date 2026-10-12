@@ -10,6 +10,9 @@ body:
         If you have found a *deployed* vulnerability (committed secrets, supply chain), stop and
         follow [SECURITY.md](https://github.com/mergit-io/.github/blob/main/SECURITY.md) instead.
 
+        **Already an open issue for this?** Do not open a pull request against it without being
+        assigned — comment on the issue with your approach and wait. See
+        [CONTRIBUTING.md](https://github.com/mergit-io/.github/blob/main/CONTRIBUTING.md#before-you-start-work).
   - type: dropdown
     id: target
     attributes:
@@ -63,3 +66,15 @@ body:
     attributes:
       label: Suggested mitigation
       description: Optional. Including "I don't see one" is useful information.
+
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched open and closed issues, and this is not a duplicate
+          required: true
+        - label: I have shown the arithmetic, and stated which assumptions I checked and which I did not
+          required: true
+        - label: I understand that a labelled hypothesis is welcome, but uncertainty presented as certainty is closed as not planned
+          required: true
