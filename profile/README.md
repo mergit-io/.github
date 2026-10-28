@@ -75,6 +75,9 @@ measured yet, and we say so wherever a number appears.
 
 [![Read the paper](https://img.shields.io/badge/read_the-paper-6366F1?style=for-the-badge)](https://github.com/mergit-io/mergit-research/blob/main/paper/draft-v1.md)
 [![Contribute](https://img.shields.io/badge/how_to-contribute-22C55E?style=for-the-badge)](https://github.com/mergit-io/.github/blob/main/CONTRIBUTING.md)
+[![Email](https://img.shields.io/badge/email-hello%40mergit.site-0F172A?style=for-the-badge)](mailto:hello@mergit.site)
+
+Questions, partnerships or press: **[hello@mergit.site](mailto:hello@mergit.site)**
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F172A,100:6366F1&height=100&section=footer" width="100%" alt="" />
 
